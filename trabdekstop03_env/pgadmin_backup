@@ -1,0 +1,111 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
+
+-- Started on 2024-06-03 23:43:27 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3380 (class 1262 OID 16384)
+-- Name: meubanco; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE meubanco WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'pt_BR.UTF-8';
+
+
+ALTER DATABASE meubanco OWNER TO postgres;
+
+\connect meubanco
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3370 (class 0 OID 16390)
+-- Dependencies: 210
+-- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.cliente (id, nome, email, telefone) FROM stdin;
+3	Igor	1234111111212	12
+4	Igor	1234111111212	12
+6	12	12	12
+2	12	12	12
+7	Oseias	121	1212
+\.
+
+
+--
+-- TOC entry 3374 (class 0 OID 16404)
+-- Dependencies: 214
+-- Data for Name: pedido; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.pedido (id, cliente_id, produto_id, quantidade, data_pedido) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3372 (class 0 OID 16397)
+-- Dependencies: 212
+-- Data for Name: produto; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.produto (id, nome, preco, quantidade) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3386 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: cliente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.cliente_id_seq', 7, true);
+
+
+--
+-- TOC entry 3387 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: pedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.pedido_id_seq', 1, false);
+
+
+--
+-- TOC entry 3388 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: produto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.produto_id_seq', 1, false);
+
+
+-- Completed on 2024-06-03 23:43:27 -03
+
+--
+-- PostgreSQL database dump complete
+--
+

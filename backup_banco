@@ -1,0 +1,314 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.12 (Ubuntu 14.12-0ubuntu0.22.04.1)
+
+-- Started on 2024-06-03 23:44:56 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3380 (class 1262 OID 16384)
+-- Name: meubanco; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE meubanco WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'pt_BR.UTF-8';
+
+
+ALTER DATABASE meubanco OWNER TO postgres;
+
+\connect meubanco
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 210 (class 1259 OID 16390)
+-- Name: cliente; Type: TABLE; Schema: public; Owner: igor
+--
+
+CREATE TABLE public.cliente (
+    id integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    email character varying(100),
+    telefone character varying(20)
+);
+
+
+ALTER TABLE public.cliente OWNER TO igor;
+
+--
+-- TOC entry 209 (class 1259 OID 16389)
+-- Name: cliente_id_seq; Type: SEQUENCE; Schema: public; Owner: igor
+--
+
+CREATE SEQUENCE public.cliente_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cliente_id_seq OWNER TO igor;
+
+--
+-- TOC entry 3382 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: cliente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: igor
+--
+
+ALTER SEQUENCE public.cliente_id_seq OWNED BY public.cliente.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 16404)
+-- Name: pedido; Type: TABLE; Schema: public; Owner: igor
+--
+
+CREATE TABLE public.pedido (
+    id integer NOT NULL,
+    cliente_id integer,
+    produto_id integer,
+    quantidade integer NOT NULL,
+    data_pedido date NOT NULL
+);
+
+
+ALTER TABLE public.pedido OWNER TO igor;
+
+--
+-- TOC entry 213 (class 1259 OID 16403)
+-- Name: pedido_id_seq; Type: SEQUENCE; Schema: public; Owner: igor
+--
+
+CREATE SEQUENCE public.pedido_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pedido_id_seq OWNER TO igor;
+
+--
+-- TOC entry 3383 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: pedido_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: igor
+--
+
+ALTER SEQUENCE public.pedido_id_seq OWNED BY public.pedido.id;
+
+
+--
+-- TOC entry 212 (class 1259 OID 16397)
+-- Name: produto; Type: TABLE; Schema: public; Owner: igor
+--
+
+CREATE TABLE public.produto (
+    id integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    preco numeric(10,2) NOT NULL,
+    quantidade integer NOT NULL
+);
+
+
+ALTER TABLE public.produto OWNER TO igor;
+
+--
+-- TOC entry 211 (class 1259 OID 16396)
+-- Name: produto_id_seq; Type: SEQUENCE; Schema: public; Owner: igor
+--
+
+CREATE SEQUENCE public.produto_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.produto_id_seq OWNER TO igor;
+
+--
+-- TOC entry 3384 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: produto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: igor
+--
+
+ALTER SEQUENCE public.produto_id_seq OWNED BY public.produto.id;
+
+
+--
+-- TOC entry 3219 (class 2604 OID 16393)
+-- Name: cliente id; Type: DEFAULT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.cliente ALTER COLUMN id SET DEFAULT nextval('public.cliente_id_seq'::regclass);
+
+
+--
+-- TOC entry 3221 (class 2604 OID 16407)
+-- Name: pedido id; Type: DEFAULT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.pedido ALTER COLUMN id SET DEFAULT nextval('public.pedido_id_seq'::regclass);
+
+
+--
+-- TOC entry 3220 (class 2604 OID 16400)
+-- Name: produto id; Type: DEFAULT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.produto ALTER COLUMN id SET DEFAULT nextval('public.produto_id_seq'::regclass);
+
+
+--
+-- TOC entry 3370 (class 0 OID 16390)
+-- Dependencies: 210
+-- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.cliente (id, nome, email, telefone) FROM stdin;
+3	Igor	1234111111212	12
+4	Igor	1234111111212	12
+6	12	12	12
+2	12	12	12
+7	Oseias	121	1212
+\.
+
+
+--
+-- TOC entry 3374 (class 0 OID 16404)
+-- Dependencies: 214
+-- Data for Name: pedido; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.pedido (id, cliente_id, produto_id, quantidade, data_pedido) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3372 (class 0 OID 16397)
+-- Dependencies: 212
+-- Data for Name: produto; Type: TABLE DATA; Schema: public; Owner: igor
+--
+
+COPY public.produto (id, nome, preco, quantidade) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3385 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: cliente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.cliente_id_seq', 7, true);
+
+
+--
+-- TOC entry 3386 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: pedido_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.pedido_id_seq', 1, false);
+
+
+--
+-- TOC entry 3387 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: produto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: igor
+--
+
+SELECT pg_catalog.setval('public.produto_id_seq', 1, false);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 16395)
+-- Name: cliente cliente_pkey; Type: CONSTRAINT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.cliente
+    ADD CONSTRAINT cliente_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3227 (class 2606 OID 16409)
+-- Name: pedido pedido_pkey; Type: CONSTRAINT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.pedido
+    ADD CONSTRAINT pedido_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3225 (class 2606 OID 16402)
+-- Name: produto produto_pkey; Type: CONSTRAINT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.produto
+    ADD CONSTRAINT produto_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3228 (class 2606 OID 16410)
+-- Name: pedido pedido_cliente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.pedido
+    ADD CONSTRAINT pedido_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES public.cliente(id);
+
+
+--
+-- TOC entry 3229 (class 2606 OID 16415)
+-- Name: pedido pedido_produto_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: igor
+--
+
+ALTER TABLE ONLY public.pedido
+    ADD CONSTRAINT pedido_produto_id_fkey FOREIGN KEY (produto_id) REFERENCES public.produto(id);
+
+
+--
+-- TOC entry 3381 (class 0 OID 0)
+-- Dependencies: 3380
+-- Name: DATABASE meubanco; Type: ACL; Schema: -; Owner: postgres
+--
+
+GRANT ALL ON DATABASE meubanco TO igor;
+
+
+-- Completed on 2024-06-03 23:44:56 -03
+
+--
+-- PostgreSQL database dump complete
+--
+
